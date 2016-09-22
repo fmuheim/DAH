@@ -5,7 +5,7 @@ from webiopi.devices.analog import MCP3208
 ADC0 = MCP3208(chip=0)
 
 # Read all ADC channels in Volts.
-print ADC0.analogReadAllVolt()
+print ( ADC0.analogReadAllVolt() )
 
 # Play with the following methods
 ADC0.analogCount()
