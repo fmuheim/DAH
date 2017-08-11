@@ -139,7 +139,8 @@ Polyphony means that the synthesizer can play more than one note at the same tim
 \item To play two or more sounds at the same time it is not recommended to use the \begin{tt}Snack\end{tt} audio package. Instead you are encouraged to use pre-recorded audio samples from a piano in mp3 format. 
 
 You can download a compressed file with the audio samples from the DAH DropBox page. To play an audio file (sampled note) 
-you can use an application such as \begin{tt}mpg321\end{tt} or  \begin{tt}omxplayer\end{tt}. Below an example is given of how to play two sounds at the same time.\\
+you can use an application such as \begin{tt}mpg321\end{tt} or  \begin{tt}omxplayer\end{tt}. Below an example is given of how to play two sounds at the same time.
+Note the \begin{tt}-q\end{tt} command to \begin{tt}mpg321\end{tt}, which stops it from producing unhelpful text output.\\
 
 \lstinputlisting{scripts/project_C_b.py}
 \vspace*{-0.5cm}
@@ -234,8 +235,11 @@ To play an audio file (sampled note) you can use an application such as \begin{t
 
 \subsection{Goals of project}
 
-The course organiser would like to celebrate the DAH course with a glass of fine wine, chilled to 
- 16$^\circ .$ You will design and build a thermostat to precisely regulate the temperature of a fluid. Regrettably, fine wine could not be made available for teaching purposes and it will be replaced by a beaker and tap water for this project. You will use a Peltier thermoelectric device to cool the liquid. The temperature of the liquid will be monitored using the 1-wire temperature sensors, which were used during the checkpoints.
+The course organiser would like to celebrate the DAH course with a glass of fine wine, chilled to exactly the right temperature.
+You will design and build a thermostat to precisely control the temperature of a fluid.
+Regrettably, fine wine could not be made available for teaching purposes and it will be replaced by a beaker of tap water for this project.
+You will use a Peltier thermoelectric device to cool the liquid.
+The temperature of the liquid will be monitored using 1-wire temperature sensors, which were used during the checkpoints.
 
 The projects have an open-ended aspect and are an opportunity where you can show your own initiative and demonstrate your experimental and computational skills. 
 
@@ -256,33 +260,48 @@ Some of this equipment will be located in the red box E. You will have to share 
 
 \subsection{Building the refrigerator}
 
-You will need to build a circuit to supply power to the Peltier element as the Raspberry-Pi cannot supply enough current itself. You can use the power supplies, available in the lab, to produce a DC voltage and control it using a power transistor connected to a GPIO pin on the Raspberry-Pi. 
-Research Peltier devices: note that one side gets hot as the other side gets cold, so you will need a heat sink. You may also need a heat sink for the transistor.
+You will need to build a circuit to supply power to the Peltier element as the Raspberry-Pi cannot supply enough current itself.
+You can use the power supplies available in the lab, to produce a DC voltage and control it using a power transistor connected to a GPIO pin on the Raspberry-Pi.
+Use a 1\,A, 1\,V supply for the Peltier.
 
-The temperature of the liquid must be monitored, so you will need to find a way to get the 1-wire sensors near to it. You will be provided with a waterproof temperature sensor, with part number DS18B20, so you will need to adjust your code appropriately if reading it with \webiopi.
+\begin{center}
+	\includegraphics[width=0.5\textwidth]{figs/PeltierCircuit}\\
+	%\caption
+	{Example circuit diagram for Peltier control.}
+\end{center}
+
+Research Peltier devices: note that one side gets hot as the other side gets cold, so you will need to place the hot side in contact with a heat sink.
+Do not power the device for more than a few seconds without this heat sink, or you may damage it!
+You may also need a heat sink for the transistor.
+
+The temperature of the liquid must be monitored, so you will need to find a way to get the 1-wire sensors near to it.
+You will be provided with a waterproof temperature sensor, with part number DS18B20, so you will need to adjust your code appropriately if reading it with \webiopi.
 
 \subsection{Monitoring and controlling the temperature}
 
-Aim first to be able to precisely control the temperature of the liquid at a few centigrade below room temperature, then try to find out how cold you can make the liquid while keeping control of fluctuations.
+Aim first to be able to precisely control the liquid at a few centigrade below room temperature before trying to find out how cold you can make the liquid.
+The Peltier device will take a long time to cool the liquid much below room temperature, so don't waste time waiting for this.
 
-
-During checkpoint 5 you already learned how to read information from the 1-wire temperature sensors, but you should now consider this in more detail. How precisely can you measure the temperature of the liquid? Are there systematic effects that you can account for by calibrating your sensors? What will you do about temperature gradients across your refrigerator when the Peltier element is switched on?
+During Checkpoint 5 you already learned how to read information from the 1-wire temperature sensors, but you should now consider this in more detail.
+How precisely can you measure the temperature of the liquid?
+Are there systematic effects that you can account for by calibrating your sensors?
+What will you do about temperature gradients across your refrigerator when the Peltier element is switched on?
+Remember that you have additional (but not waterproof!) sensors that you used in Checkpoint 5 --- these might be useful, and you have already studied their performance.
 
 Your project should include a way of displaying the current temperature of the liquid, and previous measurements.
+You should also include a visual indication of the state of the Peltier, rather than just poking it to see if it feels cold.
 
-The circuit to power and control your Peltier device is simple, but you should think carefully about when your python code should switch the cooling on and off. Rather than having a simple threshold temperature for turning the cooling on and off, you may want to use a hysteresis loop. Rapidly toggling power to the Peltier in an uncontrolled fashion is unlikely to give good performance.
-
-
-You could also vary the cooling power of your Peltier using pulse-width modulation. Here you would use your Raspberry Pi GPIO pin to create a 1kHz square wave to toggle the power transistor on and off. You then adjust how much of the cycle is spent in the on or off state.
-
-
-Your project should include a visual indication of the state of the Peltier, rather than just poking it to see if it feels cold. 
-
+The circuit to power and control your Peltier device is simple, but you should think carefully about when your python code should switch the cooling on and off.
+Rather than having a simple threshold temperature for turning the cooling on and off, you may want to use a hysteresis loop.
+Rapidly toggling power to the Peltier in an uncontrolled fashion is unlikely to give good performance.
 
 You could enhance the scope of your project in the following ways.
 \begin{enumerate}
-\item Write an interface to the control that allows the user to start and stop the temperature control programme, show the status and temperature of the Peltier, and change the temperature value of the thermostat.
-\item Consider running the Peltier as a heating element. What changes are required to the sensor, the circuit and the control programs?
+	\item Try varying the cooling power of your Peltier using pulse-width modulation.
+		Here you would use your Raspberry Pi GPIO pin to create a square wave to toggle the power transistor on and off.
+		You then adjust what percentage of time is spent in the on or off state: the `duty cycle.'
+	\item Write an interface that allows the user to start and stop the temperature control programme, show the status and temperature of the Peltier, and change the temperature value of the thermostat.
+	\item Consider running the Peltier as a heating element. What changes are required to the sensor, the circuit and the control programs?
 \end{enumerate}
 
 \input{dah-project-planning}
