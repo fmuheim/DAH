@@ -1,4 +1,5 @@
-import Tkinter
+#import Tkinter
+import tkinter
 import tkSnack
 
 
@@ -26,7 +27,8 @@ def soundStop():
         pass
     
     
-root = Tkinter.Tk()
+#root = Tkinter.Tk()
+root = tkinter.Tk()
     
 # have to initialize the sound system, required!!
 tkSnack.initializeSnack(root)

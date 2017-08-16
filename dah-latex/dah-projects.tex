@@ -51,7 +51,7 @@ which you will need to install on the Raspberry-Pi:
 The spidev library has a routine called \begin{tt}xfer()\end{tt}  that sends an array of bytes to the ADC through the SPI interface and receives ADC data in response to this request. Use \begin{tt}xfer()\end{tt}   to instruct the ADC to measure the voltage. To read the voltage from CH0 of the ADC one needs to send three bytes [6,0,0] 
 which instructs the ADC to select channel CH0, measure the voltage and then send back another three bytes (ignore the first byte, the second and the third are the high and the low byte of the 12-bit integer output of the ADC) to the Raspberry-Pi.
 
-\lstinputlisting{scripts/project_B_a.py}
+\lstinputlisting{../scripts/project_B_a.py}
  
 This method is much faster than \webiopi  and it is possible to record up to 5k samples per second, however real-time sampling is not possible and there can be holes in the data.
 
@@ -59,7 +59,7 @@ This method is much faster than \webiopi  and it is possible to record up to 5k 
 The Arduino is based on an 8-bit 16MHz chip ATmega328 and does not have an operating system by default, so it supports real-time computing, i.e. the program does not get interrupted. The Arduino also has a built-in 10-bit ADC. For this project, the Arduino is used as an ADC and a data buffer connected to the Raspberry-Pi and it will be made available pre-programmed. From your perspective the Arduino will behave as "black box", i.e. an ADC with a buffer memory that can be accessed through an USB interface. (Note: If you are interested, you may familiarise yourself with Arduino-IDE package and upload the code, {\tt ADCforRPI4.ino},  available on  \url{https://github.com/fmuheim/DAH}. 
 You will need to write python code that communicates with the Arduino using the \begin{tt}serial\end{tt} library.\\
 
-\lstinputlisting{scripts/project_B_b.py}
+\lstinputlisting{../scripts/project_B_b.py}
 
  The 8-bit resolution simplifies data transfer and processing, since each sample equals exactly one byte of data. In fact, 8 bits correspond to the effective resolution of the ADC at the largest supported sampling frequencies where the two least significant bits (of the 10-bit ADC) are essentially noise,
 This method allows for fast sampling rates of up to 100k samples per second in real-time and there are no data holes.
@@ -118,7 +118,7 @@ two expander chips are different devices the same python methods can be applied 
 %
 Here is an example code of how to use this package.\\
 
-\lstinputlisting{scripts/project_C_a.py}
+\lstinputlisting{../scripts/project_C_a.py}
 \vspace*{-0.5cm}
 \end{enumerate}
 
@@ -142,7 +142,7 @@ You can download a compressed file with the audio samples from the DAH DropBox p
 you can use an application such as \begin{tt}mpg321\end{tt} or  \begin{tt}omxplayer\end{tt}. Below an example is given of how to play two sounds at the same time.
 Note the \begin{tt}-q\end{tt} command to \begin{tt}mpg321\end{tt}, which stops it from producing unhelpful text output.\\
 
-\lstinputlisting{scripts/project_C_b.py}
+\lstinputlisting{../scripts/project_C_b.py}
 \vspace*{-0.5cm}
 \end{enumerate}
 
@@ -219,7 +219,7 @@ Now that you have a functioning ultrasonic range finder there are several possib
 
 To play an audio file (sampled note) you can use an application such as \begin{tt}mpg321\end{tt} or or  \begin{tt}omxplayer\end{tt}. Below an example is given of how to play a note using a python script.\\
 
-\lstinputlisting{scripts/project_D_a.py}
+\lstinputlisting{../scripts/project_D_a.py}
 \vspace*{-0.5cm}
 
 
@@ -227,7 +227,7 @@ To play an audio file (sampled note) you can use an application such as \begin{t
 
 \subsection*{Appendix 1 of project D: Example Code}
 
-\lstinputlisting{scripts/project_D_b.py}
+\lstinputlisting{../scripts/project_D_b.py}
 
 
 \newpage
@@ -456,7 +456,7 @@ The sketch will start immediately - you'll see the LED blinking. Hooray!
 Download the example code into the Arduino-IDE application, using the instructions from \url{https://learn.adafruit.com/esp8266-temperature-slash-humidity-webserver/code}. \\
 You will need to change this code by adding the name and password of the WiFi hotspot.
 %
-\lstinputlisting{scripts/wifi.ino}
+\lstinputlisting{../scripts/wifi.ino}
 %
 Compile the code (Sketch $\rightarrow$ Verify / Compile) and upload it
 to the \microcontroller.  Recall to put first the \microcontroller ready into boot state.
