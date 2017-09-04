@@ -1,5 +1,5 @@
 # Import ADC chip libraries
-from webiopi.devices.analog import MCP3208
+from webiopi.devices.analog.mcp3x0x import MCP3208
  
 # Define ADC on Chip Enable 0 (CE0/GPIO8) 
 ADC0 = MCP3208(chip=0)

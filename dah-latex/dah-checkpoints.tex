@@ -30,13 +30,13 @@ go to the \webIOPi header webpage, set GPIO 24 to OUT, connect this output to a 
 \begin{verbatim}
     studentn@dahpimm  ~ $ sudo python3
 \end{verbatim}
-\lstinputlisting{scripts/checkpoint_1a.py}
+\lstinputlisting{../scripts/checkpoint_1a.py}
 
 
 Write the first Python script to blink an LED for either positive or negative logic 
 by adding a "while loop".\\
 
-\lstinputlisting{scripts/checkpoint_1b.py}
+\lstinputlisting{../scripts/checkpoint_1b.py}
 \vspace*{-0.5cm}
 \hfill [2 marks]\\
 
@@ -44,7 +44,7 @@ by adding a "while loop".\\
 \item [1.4.]	  Connect the push button switch using  using negative logic (active low)  and the LED circuit with positive logic (active high).  Write a python script to toggle the LED status every time the push button switch is pushed. \\
 %once using negative logic for the push button switch. Connect the push and positive logic for the LED. \\
 
-\lstinputlisting{scripts/checkpoint_1c.py}
+\lstinputlisting{../scripts/checkpoint_1c.py}
 \vspace*{-0.5cm}
 \hfill [2 marks]\\
 
@@ -54,26 +54,57 @@ by adding a "while loop".\\
 
 
 \newpage
-\section{Checkpoint 2: ADC, DAC and  SPI BUS}
+\section{Checkpoint 2: ADC, DAC and SPI BUS}
 
+Most experimental observables are continuous: their values can vary by arbitrarily small amounts.
+However, we record measurements as discrete values: a number with some range of uncertainty.
+Creating a numerical (digital) measurement from a continuous (analogue) signal is called digitisation, and is performed by an Analogue to Digital Converter (ADC).
+The digital information can then be manipulated with a computer.
+
+In this checkpoint we will use an ADC to read information from a light sensor into the Raspberry Pi.
+We will also perform the opposite task, varying the brightness of an LED by converting a numerical output from the Raspberry Pi into the corresponding voltage level using a Digital to Analogue Converter (DAC).
+
+\vspace*{-0.5cm}
 \begin{enumerate}
 
-\item [2.1.]	 Connect Analog-to-Digital Converter (ADC) MCP3208 chip to the Raspberry-Pi using the SPI Interface on pin GPIO 8 (SPI\_CE0). Make sure that all required connections between the MCP3208 and the Raspberry-Pi are made, see the pin-out sheet. Use a multimeter to check that power (VDD) and ground (AGND and DGND) are correctly connected. Explain what all connections are for?
+\item [2.1.] Connect an ADC MCP3208 chip to the Raspberry Pi using the SPI Interface on pin GPIO 8 (SPI\_CE0).
+Make sure that all required connections between the MCP3208 and the Raspberry-Pi are made (see pin-out sheet).
+Use a multimeter to check that power (VDD) and ground (AGND and DGND) are correctly connected.
+Explain what all connections are for.
 
-Connect a potentiometer between 3.3 V and ground and connect the output to one of the ADC input channels.  Use python interactively to read the voltages of all eight channels. Play with changing the input channel(s).  Read the ADC channels using all the methods given below. You are encouraged to consult the following webpage where you also can find this information, see \url{http://webiopi.trouch.com/} ($\rightarrow$ Tutorials $\rightarrow$ Using Devices $\rightarrow$ Analogue). Explain how the ADC works and what the meaning of the return values of each method is. What is the primary ADC output and how is the voltage output calculated from this? \\
+Connect a Light Dependent Resistor (LDR) and a 4.7~k$\Omega$ resistor as a voltage divider between 3.3 and 0~V, using an ADC input channel to measure the voltage in the middle.
+Use python interactively to read the voltages of all eight ADC channels.
+Try reading a specific ADC channel, and experiment with all the other methods given below.
+You are encouraged to consult the following webpage \url{http://webiopi.trouch.com/}($\rightarrow$ Tutorials $\rightarrow$ Using Devices $\rightarrow$ Analogue).
 
-\lstinputlisting{scripts/checkpoint_2a.py}
+Explain how the ADC works and what the meaning of the return values of each method is.
+What is the primary ADC output and how is the voltage output calculated from this?
+Cover the LDR with your hand, and explain how the ADC readings change. \\
+
+\lstinputlisting{../scripts/checkpoint_2a.py}
+\vspace*{-0.5cm}
 \hfill [3 marks]\\
 
-\newpage
-\item [2.2.]	 Connect the Digital-to-Analog-Converter (DAC) MCP4922 chip to the Raspberry-Pi using the SPI Interface on GPIO 7 (SPI\_CE1). Make sure that all required connections between the MCP4922 and the Raspberry-Pi are made, see pin-out sheet. Use a multimeter to check that power (VDD) and ground (AVSS) are correctly connected. Explain and how the DAC works and what all connections are for. 
+%\newpage
+\item [2.2.] Leave the ADC in place, but also connect the DAC MCP4922 chip to the Raspberry-Pi using the other SPI Interface on GPIO 7 (SPI\_CE1).
+Make sure that all required connections between the MCP4922 and the Raspberry-Pi are made (see pin-out sheet).
+Use a multimeter to check that power (VDD) and ground (AVSS) are correctly connected.
+Explain how the DAC works and what all connections are for.
 
-Use python interactively to set a value, e.g. 1.3 V to output VOUTA of the DAC. Measure this voltage with a multimeter. \\
+Use python interactively to set a value --- e.g. 1.3 V --- to output VOUTA of the DAC.
+Measure this voltage with a multimeter. \\
 
-\lstinputlisting{scripts/checkpoint_2b.py}
+\lstinputlisting{../scripts/checkpoint_2b.py}
+\vspace*{-0.5cm}
 \hfill [2 marks]\\
 
-\item [2.3.] Connect the two outputs of the DAC MCP4922 to two inputs of the ADC MCP3208. Write a python script that that sets a series of different values on both two DAC outputs and reads the corresponding values of the ADC channels.  Write the DAC setting and measured ADC values at each step to an output file with comments such that the content of the file will explain your work.  
+\item [2.3.] Connect one output of the DAC to an LED.
+Write a python script that varies the brightness of the LED by setting a series of different values for the output voltage of the DAC.
+Now arrange the circuit so that the LED is next to the LDR, and the change in brightness can be measured.
+The laboratory is quite bright relative to an LED, so you might need to cover the breadboard to show a convincing change.
+Modify your script to read the ADC input each time you set the DAC output.
+Write the DAC setting and measured ADC values at each step to an output file with comments such that the content of the file will explain your work.
+
 
 \hfill [3 marks]\\
 
@@ -131,7 +162,7 @@ Write a python script to blink the LED using negative logic, see checkpoint 1 fo
 
 You may consult the \webiopi webpage  \url{http://webiopi.trouch.com/} ($\rightarrow$ Tutorials $\rightarrow$ Using Devices $\rightarrow$ Digital) to find information on the GPIO expander chip. \\
 
-\lstinputlisting{scripts/checkpoint_4a.py}
+\lstinputlisting{../scripts/checkpoint_4a.py}
 \hfill [3 marks]\\
 
 \item [4.2.] Connect an additional 3 LEDs to outputs P1, P2 and P3 of the PCF8574AN Expander chip. Write a python script which turns the LEDs on and off in a predefined pattern, such as a running light. Consider P0 to P3 as default, but you are encouraged to play with other patterns. 
@@ -141,7 +172,7 @@ You may consult the \webiopi webpage  \url{http://webiopi.trouch.com/} ($\righta
 \newpage
 \item [4.3.] Consult the webpage \url{http://webiopi.trouch.com/} ($\rightarrow$ Tutorials $\rightarrow$ Using Devices $\rightarrow$ Digital) for the GPIO Expander. Use the portWrite(value) method to manipulate all four LEDs at the same time.  Connect a push button switch to pin P4 of the expander chip. Write a python script such that an LED pattern toggles every time the button is pushed.\\
 
-\lstinputlisting{scripts/checkpoint_4b.py}
+\lstinputlisting{../scripts/checkpoint_4b.py}
 \hfill [3 marks]\\
 
 
@@ -195,7 +226,7 @@ WebIOPi provides a simple way to access the temperature sensor data in python. I
 \begin{verbatim}
     studentn@dahpimm ~ $ python3
 \end{verbatim}
-\lstinputlisting{scripts/checkpoint_5a.py}
+\lstinputlisting{../scripts/checkpoint_5a.py}
 \hfill [2 marks]
 
 
@@ -205,7 +236,7 @@ As a second step the graph should update itself as each temperature measurement 
 
 You should probably use the following python commands:\\
 
-\lstinputlisting{scripts/checkpoint_5b.py}
+\lstinputlisting{../scripts/checkpoint_5b.py}
 \hfill [3 marks]
 
 
@@ -218,7 +249,7 @@ Note that your temperature sensors will have different serial numbers.
 \begin{verbatim}
     studentn@dahpimm  ~ $ python3
 \end{verbatim}
-\lstinputlisting{scripts/checkpoint_5c.py}
+\lstinputlisting{../scripts/checkpoint_5c.py}
 
 What is the smallest change in temperature that a sensor can report? Explain this with reference to the datasheet, and how the temperature information is encoded.
 
@@ -227,7 +258,7 @@ Investigate the accuracy of the sensor readings by looking at the stability of t
 Modify your graphing code from part 5.2 to make histograms of the temperature measurements of the two sensors. 
 
 You can use the pylab histogram command:\\
-\lstinputlisting{scripts/checkpoint_5d.py}
+\lstinputlisting{../scripts/checkpoint_5d.py}
 Make also a graph of the difference between the temperature of the two sensors. Determine the RMS value of a set of temperature difference measurements between the two sensors. Explain your results. Are these consistent with the datasheet?
 
 \hfill [3 marks]
@@ -246,7 +277,7 @@ Thus this checkpoint is best carried out using the Physics CPlab computers.
 There is a CPlab computer available on every desk in the DAH laboratory.
 You can use the following python libraries. \\
 
-\lstinputlisting{scripts/checkpoint_6a.py}
+\lstinputlisting{../scripts/checkpoint_6a.py}
 
 The LHCb experiment at the Large Hadron Collider at CERN has recorded a sample of muon pairs with invariant masses in the range of 8.5 to 11 GeV/$c^2$. Three clear peaks are observed in this mass spectrum. These correspond to the production of Upsilon mesons, which are bound states of a $b$ and a anti-$b$ quark. These states are known as the $\Upsilon \rm (1S)$, $\Upsilon \rm (2S)$ and $\Upsilon \rm (3S)$ mesons where the $\Upsilon \rm (1S)$ meson is the ground state and the $\Upsilon \rm (2S)$  and $\Upsilon \rm (3S)$  states are radial excitations (for LHCb paper, see {DOI: 10.1007/JHEP06(2013)064).}
 
