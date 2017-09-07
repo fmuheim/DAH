@@ -1,31 +1,38 @@
 \chapter{DAH Checkpoints}
 \label{sec:checkpoints}
 \vspace*{-0.99cm}
-{\bf Important note}: Please consult the DAH manual to familiarise yourself with the equipment, including the Raspberry-Pi, LED and temperature sensors, ADCs, DACs, I/O, switches, breadboard and connectors. The manual contains details instructions how to operate the Raspberry-Pi. It is suggested to use the epiphany browser on the Raspberry Pi. To copy python code snippets, see below, into your python scripts download these files from github, see \url{https://github.com/fmuheim/DAH}.  Data sheets for all electronic elements, are available from Dropbox,
-see: \url{https://www.dropbox.com/sh/gfnisnh4ntnum1d/AAAWtNL_AhcpR8PZ_QmqZpsja?n=112609310}.  
-The DAH manual also provides information on how to start and stop the \webIOPi Code application.
+{\bf Important note}: Please consult the DAH manual to familiarise yourself with the equipment, including the Raspberry-Pi, LEDs, temperature sensors, ADCs, DACs, I/O, switches, breadboard and connectors.
+The manual contains detailed instructions on how to operate the Raspberry-Pi.
+It is suggested to use the epiphany web browser, since it is relatively fast.
+To copy python code snippets (see below) into your python scripts, download these files from github, see \url{https://github.com/fmuheim/DAH}.
+Data sheets for all electronic elements are available from Dropbox, see: \url{https://www.dropbox.com/sh/gfnisnh4ntnum1d/AAAWtNL_AhcpR8PZ_QmqZpsja?n=112609310}.  
+The DAH manual also provides information on how to start and stop the \webIOPi web server.
 
 \section{Checkpoint  1: LEDs and Switches}
 
 \begin{enumerate}
-\item [1.1.] Control and LED with the Raspberry-Pi by completing the following steps. Connect the Raspberry-Pi to a breadboard and start the \webIOPi Code application.
-Start the epiphany web browser and %on the Raspberry Pi and go to \url{localhost:8000}.
-go to the \webIOPi header webpage, set GPIO 24 to OUT, connect this output to a LED with a 1~kOhm resistor in series to ground, switch the LED on and off.  Repeat the exercise with negative logic (active low) by connecting the LED with a 1~kOhm resistor in series to 3.3 V.  Draw a schematic diagram for this circuit, see example below.  
+\item [1.1.] Control an LED with the Raspberry-Pi by completing the following steps. Connect the Raspberry-Pi to a breadboard and start the \webIOPi web server.
+Start the chromium web browser (unfortunately epiphany does not work correctly for this task) and go to the \webIOPi header webpage.
+Set GPIO 24 to OUT, connect this output to an LED with a 1~kOhm resistor in series to ground, and switch the LED on and off using the web interface.
+Repeat the exercise with negative logic (active low) by connecting the LED with a 1~kOhm resistor in series to 3.3 V.
+Draw a schematic diagram for this circuit, see example below.  
 
-\hfill [2 marks]
- \vspace*{-8mm}
- \begin{center}                                        
- {\includegraphics[width=10cm]{figs/ActiveHighLED}}
- \end{center}
+%\hfill [2 marks]
+\vspace*{-8mm}
+\begin{center}                                        
+{\includegraphics[width=10cm]{figs/ActiveHighLED}}
+\end{center}
                                                             
  
-\item [1.2.] Using positive logic (active high) connect a push-button Switch between 3.3V and GPIO23 and, with a 1kOhm resistor in series, to ground and explain what happens on the webIOPI header webpage. Draw a schematic diagram for this circuit. Afterwards stop the  \webIOPi Code application.
+\item [1.2.] Using positive logic (active high) connect a push-button Switch between 3.3V and GPIO23 and, with a 1kOhm resistor in series, to ground and explain what happens on the webIOPI header webpage.
+Draw a schematic diagram for this circuit. Afterwards stop the \webIOPi web server.
 %Repeat the exercise with negative logic, explain it and draw a schematic diagram. 
  
- \hfill [1 mark]\\
+%\hfill [1 mark]\\
       
 
-\item [1.3.]  Connect an LED with a 1~kOhm resistor as in checkpoint 1.1 above. Start python interactively to set GPIO 24.   Using the templates, import the webiopi framework, make a GPIO object and turn the LED on and off.
+\item [1.3.] Connect an LED with a 1~kOhm resistor as in checkpoint 1.1 above. Start python interactively to set GPIO 24. 
+Using the code templates, import the webiopi framework, make a GPIO object and turn the LED on and off.
 %
 \begin{verbatim}
     studentn@dahpimm  ~ $ sudo python3
@@ -37,16 +44,17 @@ Write the first Python script to blink an LED for either positive or negative lo
 by adding a "while loop".\\
 
 \lstinputlisting{../scripts/checkpoint_1b.py}
-\vspace*{-0.5cm}
-\hfill [2 marks]\\
+%\vspace*{-0.5cm}
+%\hfill [2 marks]\\
 
 
-\item [1.4.]	  Connect the push button switch using  using negative logic (active low)  and the LED circuit with positive logic (active high).  Write a python script to toggle the LED status every time the push button switch is pushed. \\
+\item [1.4.] Connect the push button switch using using negative logic (active low) and the LED circuit with positive logic (active high).
+Write a python script to toggle the LED status every time the push button switch is pushed. \\
 %once using negative logic for the push button switch. Connect the push and positive logic for the LED. \\
 
 \lstinputlisting{../scripts/checkpoint_1c.py}
-\vspace*{-0.5cm}
-\hfill [2 marks]\\
+%\vspace*{-0.5cm}
+%\hfill [2 marks]\\
 
 
 \end{enumerate}
@@ -234,7 +242,7 @@ WebIOPi provides a simple way to access the temperature sensor data in python. I
  
 As a second step the graph should update itself as each temperature measurement is made. Write a python script for this purpose.  Once this is working, play with it by touching the temperature sensor with you fingers. Describe what is happening and sketch it in your lab book.
 
-You should probably use the following python commands:\\
+The following code example shows how to display a plot that updates regularly:\\
 
 \lstinputlisting{../scripts/checkpoint_5b.py}
 \hfill [3 marks]
@@ -268,7 +276,7 @@ Make also a graph of the difference between the temperature of the two sensors. 
 
 
 \newpage
-\section{Checkpoint 5: Data Handling and Analysis}
+\section{Checkpoint 6: Data Handling and Analysis}
 
 \begin{enumerate}
 

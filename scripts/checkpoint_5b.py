@@ -1,15 +1,23 @@
-# Find out the current time
-import datetime
-datetime.datetime.now()
-
-# Make a list from a measurement, add another measurement
-# to the end of the list
-someData = [ oneMeasurement ]
-someData.append( anotherMeasurement )
-
-# Pylab makes graph plotting very easy:
 import pylab
-pylab.ion()                             # Turns interactive mode on
-pylab.plot( someXValues, someYValues )  # Make an xy plot
-pylab.draw()                            # Display the current plot
-pylab.clf()                             # Clear the display
+import matplotlib.animation as animation
+import datetime
+
+# Empty arrays of time and measurement values to plot
+timeValues = [ ]
+measurements = [ ]
+
+# Set up the plot object
+plotFigure = pylab.figure()
+
+# The function to call each time the plot is updated
+def updatePlot( i ):
+
+    timeValues.append( datetime.datetime.now() ) # Store the current time
+    measurements.append( MEASUREMENT )           # Store the measurement
+    plotFigure.clear()                           # Clear the old plot
+    pylab.plot( timeValues, measurements )       # Make the new plot
+
+
+# Make the animated plot
+ani = animation.FuncAnimation( plotFigure, updatePlot, interval=1000 )
+pylab.show()
