@@ -17,10 +17,12 @@ def reading(sensor):
     GPIO.setmode(GPIO.BCM)
     
     if sensor == 0:
+
+        # Setup the GPIO pins for TRIG and ECHO, including defining
+        # if these are input or output pins
+
+        # Insert your code here
         
-        GPIO.setup(TRIG,GPIO.OUT) 
-        GPIO.setup(ECHO,GPIO.IN)
-        GPIO.output(TRIG, GPIO.LOW)
         
         time.sleep(0.3)
         
@@ -52,7 +54,9 @@ def reading(sensor):
         
         # we now have our distance but it's not in a useful unit of
         # measurement. So now we convert this distance into centimetres
-        distance = timepassed * 17000
+        # Define relation between "distance" and "timepassed"
+
+        # Insert your code here
         
         # return the distance of an object in front of the sensor in cm
         return distance
@@ -61,8 +65,8 @@ def reading(sensor):
         GPIO.cleanup()
  
     else:
-        print "Incorrect usonic() function variable."
+        print ("Incorrect usonic() function variable.")
        
-print reading(0)
+print (reading(0))
  
 

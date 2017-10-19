@@ -152,6 +152,7 @@ Can you find where the bottle-neck occurs in trying to achieve polyphony? Is the
 
 
 \input{dah-project-planning}
+\vfill
 
 \subsection*{Appendix 1 of Project C: Frequency Table for Notes}
 \vspace*{-1.0cm}
@@ -165,7 +166,8 @@ Can you find where the bottle-neck occurs in trying to achieve polyphony? Is the
 
 \subsection{Goals of project}
 
-You will develop and build an ultrasonic range finder. This device will use an ultrasound transducer as a distance sensor. The \webiopi framework, which was used during the checkpoints will be a part of this project. 
+You will develop and build an ultrasonic range finder. This device will use an ultrasound transducer as a distance sensor. 
+%The \webiopi framework, which was used during the checkpoints will be a part of this project. 
 
 The projects have an open-ended aspect and are an opportunity where you can show your own initiative and demonstrate your experimental and computational skills. 
 
@@ -186,20 +188,24 @@ Some of this equipment will be located in the red box D. You will have to share 
 You will develop an ultrasonic range finder using a HC-SR04 Distance Sensor. 
 Start by connecting the HC-SR04 to the Raspberry-Pi, as shown in the Figure below. Test the circuit using the code examples, which are provided in Appendix 1 of project D below. 
 %You will need to make changes in your scripts  so that it will work within the \webiopi framework.
-You will need to make changes in your scripts  so that it will work within the \webiopi framework.
+You will need to make a few changes in your script  to get it to work.
 
 \begin{center}                                        
  {\includegraphics[width=0.50\textwidth]{figs/hcsr04.png}}
  \end{center}
 
 
-Hints: The output of the HC-SR04 module is a logic level one of 5 V. The Raspberry-Pi works with 3.3V logic signals. A 1 k$\Omega$ resistor in series will limit the current in the circuit to prevent damaging the Raspberry Pi. The loudspeakers are power hungry, so they  should be connected  via USB to the 
-monitor.
+Hints: The output of the HC-SR04 module is a logic level one of 5 V. The Raspberry-Pi works with 3.3V logic signals. A 1 k$\Omega$ resistor in series will limit the current in the circuit to prevent damaging the Raspberry Pi.
  
 \begin{enumerate}
 \item 	Work out how the HC-SR04 sensor operates. What are the "Trig" and "Echo" pins of the HC-SR04 module used for? Use the oscilloscope to capture these signals when running the code example. 
 
 \item Use these data to explain in detail how the module works and how it is possible to measure distance using ultrasonic waves.
+
+%\item  Rewrite  your scripts using the  \webiopi instead of the \begin{tt}RPi\end{tt} framework.
+\item  Familiarise yourself with the  \begin{tt}RPi\end{tt} framework, see e.g. \\
+\url{https://sourceforge.net/p/raspberry-gpio-python/wiki/BasicUsage}.\\
+Using the \begin{tt}RPi\end{tt} framework complete the function \begin{tt} def reading(sensor):\end{tt} in your script and test your circuit.
 
 \item What are the minimum and maximum distance that your Range Finder can measure? 
 \end{enumerate}
@@ -209,13 +215,17 @@ monitor.
 Now that you have a functioning ultrasonic range finder there are several possible applications.
 
 \begin{enumerate}
-\item  Rewrite  your scripts using the  \webiopi instead of the \begin{tt}RPi\end{tt} framework.
 
 \item	Try to understand better the properties and limitations of your device. What are the minimum and maximum size of objects the range finder is able to detect? Play with reflecting surfaces of different areas and define the angular range (span of angles) within the range finder works? Is this approach suitable for large or small objects? Is there a relation between the distance and the size of the reflection area?
 
 \item Develop an application of your choice. An example could be an electronic "Car Parking Assistant" where sounds are created and LEDs flash (or similar) if the sensor gets too close to an object.
 
+\item Perform a calibration of the distance scale of your application.
+
 \end{enumerate}
+
+Note that the loudspeakers are power hungry, so they  should be connected  via USB to the 
+monitor.
 
 To play an audio file (sampled note) you can use an application such as \begin{tt}mpg321\end{tt} or or  \begin{tt}omxplayer\end{tt}. Below an example is given of how to play a note using a python script.\\
 
@@ -224,6 +234,7 @@ To play an audio file (sampled note) you can use an application such as \begin{t
 
 
 \input{dah-project-planning}
+
 
 \subsection*{Appendix 1 of project D: Example Code}
 
@@ -309,7 +320,7 @@ You could enhance the scope of your project in the following ways.
  
  
 \newpage
-\section{Project F: Make Accurate Measurements of Particle Masses}
+\section{Project F1: Make Accurate Measurements of Particle Masses}
 
 \subsection{Goals of project}
 
@@ -317,7 +328,7 @@ You will use LHCb data on the invariant mass of particle candidates that you wer
 
 The projects have an open-ended aspect and are an opportunity where you can show your own initiative and demonstrate your experimental and computational skills. 
 
-\subsection{Equipment for project F}
+\subsection{Equipment for project F1}
 
 Note: this is a data analysis project, which does not require use of the Raspberry Pi.
 This project is best carried out using the Physics CPlab computers. No other equipment is needed.  There is a CPlab computer available on every desk in the DAH laboratory.
@@ -342,7 +353,10 @@ During checkpoint 6, you performed some very simple "peak finding". In this proj
 
 \item	Use this PDF in a Maximum Likelihood fit to determine the parameters of the PDF. Note hat it is essential that the composite PDF remains normalised to 1 over the range of the fit.
 
-Determine the $\Upsilon \rm (1S)$  meson mass and yield, and all other parameters, and their and errors\footnote{You can almost certainly obtain the parameter errors directly from your minimization engine (scipy.optimize.minimise, or Minuit). It would be good to show that you understand these by obtaining them yourself from the parameters of the Gaussian signal fit - this is described in the data handling lectures.}.
+Determine the $\Upsilon \rm (1S)$  meson mass and yield, and all other parameters, and their and errors.
+
+You should be able to obtain the parameter errors directly from the minimization engine of your choice (scipy.optimize.minimise, scipy.optimise.curve\_fit, lmfit, see \url{https://lmfit.github.io/lmfit-py/} or Minuit). Depending on your choice you will be able to chose different minimising methods.
+It would be good to show that you understand these by obtaining them yourself from the parameters of the Gaussian signal fit - this is described in the data handling lectures.
 
 Plot the fitted signal shape on top of the data.
 
@@ -365,6 +379,215 @@ You could implement each of these functions in your PDF and see how much better 
 \input{dah-project-planning} 
  
  
+
+
+\newpage
+\section{Project F2: Make Accurate Measurements of Particle Masses}
+
+\subsection{Goals of project}
+
+You will use LHCb data on the invariant mass of particle candidates that you were introduced to during a checkpoint. You will analyse this in a much more sophisticated way and closer to the actual analysis performed leading to its publication. You will use the maximum likelihood process to fit different mass model shapes to the data. From this you will determine the parameters of the mass model for the three signal peaks, and their errors. You will start with a very simple Gaussian mass model. You will then improve this and use a more sophisticated model.
+
+The projects have an open-ended aspect and are an opportunity where you can show your own initiative and demonstrate your experimental and computational skills. 
+
+\subsection{Equipment for project F2}
+
+Note: this is a data analysis project, which does not require use of the Raspberry Pi.
+This project is best carried out using the Physics CPlab computers. No other equipment is needed.  There is a CPlab computer available on every desk in the DAH laboratory.
+You may also use your own laptop computer, but you will need to be able to install
+python and python packages on your own. 
+
+
+\subsection{Detailed project description}
+ 
+ You were previously introduced to the LHCb Upsilon data. In this
+project you will explore another LHCb dataset where a pair of
+oppositely charged kaons and a pion have been combined. Two clear
+peaks are observed in this mass spectrum corresponding to the $D_s^+$
+and $D^+$ mesons, see figure below % (Fig.~\ref{fig:dmass}). 
+For more information see: {DOI:10.1007/JHEP06(2013)065}. 
+ 
+During checkpoint 6, you performed some very simple "peak finding". In this project you are going to do the analysis much like it would actually be carried out in a particle physics experiment.
+
+%
+%\begin{figure}[htb!]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{figs/KKpi.pdf}\\
+%\caption
+{\small $K^{+}K^{-}\pi^{+}$ invariant mass distribution.}
+%\label{fig:dmass}
+\end{center}
+%\end{figure}
+%
+
+
+\begin{enumerate}
+
+\item Consider first the $D^+$ peak which is the particle with the lowest
+mass, i.e. the left most peak in the plot. Construct a composite probability density
+function (PDF) for the invariant mass of the muon pairs, which
+contains two components : 
+\begin{itemize}
+\item A Gaussian shape to fit the  $D^+$ mass peak;
+\item A shallow falling exponential to fit the background shape of the mass spectrum underneath and around the peak.
+\end{itemize}
+
+\item	Use this PDF in a Maximum Likelihood fit to determine the parameters of the PDF. Note hat it is essential that the composite PDF remains normalised to 1 over the range of the fit.
+
+Determine the $D^+$  meson mass and yield, and all other parameters, and their and errors.
+
+You should be able to obtain the parameter errors directly from the minimization engine of your choice (scipy.optimize.minimise, scipy.optimise.curve\_fit, lmfit, see \url{https://lmfit.github.io/lmfit-py/} or Minuit). Depending on your choice you will be able to chose different minimising methods.
+It would be good to show that you understand these by obtaining them yourself from the parameters of the Gaussian signal fit - this is described in the data handling lectures.
+
+Plot the fitted signal shape on top of the data.
+
+\item Now consider the entire mass range, and perform a simultaneous fit for both
+peaks, and the underlying background. Again you should always report the parameter
+values, and their errors. Plot the fitted signal shape on top of the data.
+\item The results so far probably look "Äùquite good"Äù by eye. i.e. the signal shape plotted on
+top of the data probably looks like it fits quite well. However this can be misleading
+when performing a precision measurement. You should make a plot of what are called
+the "Äùresiduals"Ä. A residual is the difference between the data in the binned histogram
+and the best-fit mass model value for the centre of that bin. Describe what you see.
+\item There are several ways to enhance the scope of the project.
+
+\begin{itemize} 
+\item For example, if the single
+Gaussian mass model does not fit the data perfectly, one can try other mass models,
+i.e. by using a signal PDF that goes beyond a single Gaussian
+function. One example: is a PDF comprising a function which is the sum of two Gaussian functions (i.e. one
+narrow and one wide Gaussian function to fit a single D meson
+peak. Alternatively try a Crystal Ball function, which incorporates a non-Gaussian tail at the lower end of
+the mass peak. The functional shape is described elsewhere, e.g. see:
+\begin{verbatim}
+https://en.wikipedia.org/wiki/Crystal_Ball_function 
+\end{verbatim} 
+You could implement each of these functions in your PDF and see how much better
+they are at describing the data.
+\item Read the publication and see what is said about systematic errors. Make a reasonable
+attempt at determining some systematic errors on the masses.
+\item Compare your results to the PDG and previous measurements.
+\item Study how the mass and the width of the peak (the resolution)
+  depends on the transverse momentum (pt) and rapidity (eta).
+\end{itemize}
+
+
+
+\end{enumerate}
+
+\input{dah-project-planning} 
+ 
+
+
+\newpage
+\section{Project F3: Make Accurate Measurements of Particle Masses}
+
+\subsection{Goals of project}
+
+You will use LHCb data on the invariant mass of particle candidates that you were introduced to during a checkpoint. You will analyse this in a much more sophisticated way and closer to the actual analysis performed leading to its publication. You will use the maximum likelihood process to fit different mass model shapes to the data. From this you will determine the parameters of the mass model for the three signal peaks, and their errors. You will start with a very simple Gaussian mass model. You will then improve this and use a more sophisticated model.
+
+The projects have an open-ended aspect and are an opportunity where you can show your own initiative and demonstrate your experimental and computational skills. 
+
+\subsection{Equipment for project F3}
+
+Note: this is a data analysis project, which does not require use of the Raspberry Pi.
+This project is best carried out using the Physics CPlab computers. No other equipment is needed.  There is a CPlab computer available on every desk in the DAH laboratory.
+You may also use your own laptop computer, but you will need to be able to install
+python and python packages on your own. 
+
+
+\subsection{Detailed project description}
+
+You were previously introduced to the LHCb Upsilon data. In this
+project you will explore another LHCb dataset where a $\psi(2S)$ meson
+(a bound $c\overline{c}$ state) and a pair of
+oppositely pions have been combined. Two clear
+peaks are observed in this mass spectrum corresponding to the $B_s$
+and $B^0$ mesons, see figure below %(Fig.~\ref{fig:bmass}). 
+The background shape is quite
+complex. At higher masses it is exponential in shape. At lower masses
+there is an additional background from the decay $B^0 \rightarrow
+\psi(2S) K^+ \pi^-$ where the kaon has been incorrectly identified as
+a pion. For more information see: {DOI: 10.1016/j.nuclphysb.2013.03.004 and DOI: 10.1016/j.physletb.2015.06.038}.
+
+
+During checkpoint 6, you performed some very simple "peak finding". In this project you are going to do the analysis much like it would actually be carried out in a particle physics experiment.
+
+%
+%\begin{figure}[htb!]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{figs/psi2Spipi.pdf}\\
+%\caption
+{\small $\psi ({\rm 2S}) \pi^{+} \pi^{-}$  invariant mass distribution.}
+%\label{fig:bmass}
+\end{center}
+%\end{figure}
+%
+
+
+\begin{enumerate}
+
+
+\item Consider first the $B_s$ peak which is the particle with the highest
+mass, i.e. the right most peak in the plot. Construct a composite probability density
+function (PDF) for the invariant mass of the muon pairs, which
+contains two components :
+
+\begin{itemize}
+\item A Gaussian shape to fit the $B_s$ peak;
+\item A shallow falling exponential to fit the background shape of the mass spectrum
+underneath the peak.
+\end{itemize}
+
+\item Use this PDF in a Maximum Likelihood fit to determine the parameters of the PDF.
+Note hat it is essential that the composite PDF remains normalised to 1 over the range
+of the fit. 
+
+Determine the $B_s$ meson mass and yield, and all other parameters, and their and
+errors.
+
+You should be able to obtain the parameter errors directly from the minimization engine of your choice (scipy.optimize.minimise, scipy.optimise.curve\_fit, lmfit, see \url{https://lmfit.github.io/lmfit-py/} or Minuit). Depending on your choice you will be able to chose different minimising methods.
+It would be good to show that you understand these by obtaining them yourself from the parameters of the Gaussian signal fit - this is described in the data handling lectures.
+
+Plot the fitted signal shape on top of the data.
+
+\item Now consider the mass range above the reflection, and perform a simultaneous fit for both
+peaks, and the underlying background. Again you should always report the parameter
+values, and their errors. Plot the fitted signal shape on top of the data.
+
+\item The results so far probably look "quite good" by eye.  i.e. the signal shape plotted on top of the data probably looks like it fits quite well.  However this can be misleading when performing a precision measurement.  You should make a plot of what are called the "residuals". A residual is the difference between the data in the binned histogram and the best-fit mass model value for the centre of that bin. Describe what you see.
+
+\newpage
+
+\item There are several ways to enhance the scope of the project.
+
+\begin{itemize} 
+\item For example, if the single
+Gaussian mass model does not fit the data perfectly, one can try other mass models,
+i.e. by using a signal PDF that goes beyond a single Gaussian
+function. One example: is a PDF comprising a function which is the sum of two Gaussian functions (i.e. one
+narrow and one wide Gaussian function to fit a single D meson
+peak. Alternatively try a Crystal Ball function, which incorporates a non-Gaussian tail at the lower end of
+the mass peak. The functional shape is described elsewhere, e.g. see:
+\begin{verbatim}
+https://en.wikipedia.org/wiki/Crystal_Ball_function 
+\end{verbatim} 
+You could implement each of these functions in your PDF and see how much better
+they are at describing the data.
+\item Try to extend the fit to include the kinematic reflection
+\item Read the publication and see what is said about systematic errors. Make a reasonable
+attempt at determining some systematic errors on the masses.
+\item Compare your results to the PDG and previous measurements.
+\item From the yields of $B_s$ and $B^0$ mesons, following the
+  procedures in the papers try to evaluate the ratio of branching
+  ratios of these modes.
+\end{itemize}
+
+
+\end{enumerate}
+
+\input{dah-project-planning} 
+
 \newpage
 \section{Project G: Building a Remote Sensing System}
 
@@ -377,6 +600,7 @@ download these data and build a monitoring system.
 
 
 The projects have an open-ended aspect and are an opportunity where you can show your own initiative and demonstrate your experimental and computational skills. 
+
 
 \subsection{Equipment for project G}
 
@@ -609,6 +833,7 @@ use hairdryer
 
 \input{dah-project-planning}
 
+
 \newpage
 \section{Project X: Develop a Project or Suggest Your Own Project}
 
@@ -636,250 +861,5 @@ You will need to bring your own toy train set-up.
 
 \input{dah-project-planning}
 
-\newpage
-\section{Project F1: Make Accurate Measurements of Particle Masses}
-
-\subsection{Goals of project}
-
-You will use LHCb data on the invariant mass of particle candidates that you were introduced to during a checkpoint. You will analyse this in a much more sophisticated way and closer to the actual analysis performed leading to its publication. You will use the maximum likelihood process to fit different mass model shapes to the data. From this you will determine the parameters of the mass model for the three signal peaks, and their errors. You will start with a very simple Gaussian mass model. You will then improve this and use a more sophisticated model.
-
-The projects have an open-ended aspect and are an opportunity where you can show your own initiative and demonstrate your experimental and computational skills. 
-
-\subsection{Equipment for project F1}
-
-Note: this is a data analysis project, which does not require use of the Raspberry Pi.
-This project is best carried out using the Physics CPlab computers. No other equipment is needed.  There is a CPlab computer available on every desk in the DAH laboratory.
-You may also use your own laptop computer, but you will need to be able to install
-python and python packages on your own. 
-
-
-\subsection{Detailed project description}
- 
- You were previously introduced to the LHCb Upsilon data. In this
-project you will explore another LHCb dataset where a pair of
-oppositely charged kaons and a pion have been combined. Two clear
-peaks are observed in this mass spectrum corresponding to the $D_s^+$
-and $D^+$ mesons, see figure below % (Fig.~\ref{fig:dmass}). 
-For more information see: {DOI:10.1007/JHEP06(2013)065}. 
- 
-During checkpoint 6, you performed some very simple "peak finding". In this project you are going to do the analysis much like it would actually be carried out in a particle physics experiment.
-
-%
-%\begin{figure}[htb!]
-\begin{center}
-\includegraphics[width=0.75\textwidth]{figs/KKpi.pdf}\\
-%\caption
-{\small $K^{+}K^{-}\pi^{+}$ invariant mass distribution.}
-%\label{fig:dmass}
-\end{center}
-%\end{figure}
-%
-
-
-\begin{enumerate}
-
-\item Consider first the $D^+$ peak which is the particle with the lowest
-mass, i.e. the left most peak in the plot. Construct a composite probability density
-function (PDF) for the invariant mass of the muon pairs, which
-contains two components : 
-\begin{itemize}
-\item A Gaussian shape to fit the  $D^+$ mass peak;
-\item A shallow falling exponential to fit the background shape of the mass spectrum underneath and around the peak.
-\end{itemize}
-
-\item	Use this PDF in a Maximum Likelihood fit to determine the parameters of the PDF. Note hat it is essential that the composite PDF remains normalised to 1 over the range of the fit.
-
-Determine the $D^+$  meson mass and yield, and all other parameters, and their and errors\footnote{You can almost certainly obtain the parameter errors directly from your minimization engine (scipy.optimize.minimise, or Minuit). It would be good to show that you understand these by obtaining them yourself from the parameters of the Gaussian signal fit - this is described in the data handling lectures.}.
-
-Plot the fitted signal shape on top of the data.
-
-\item Now consider the entire mass range, and perform a simultaneous fit for both
-peaks, and the underlying background. Again you should always report the parameter
-values, and their errors. Plot the fitted signal shape on top of the data.
-\item The results so far probably look ‚Äùquite good‚Äù by eye. i.e. the signal shape plotted on
-top of the data probably looks like it fits quite well. However this can be misleading
-when performing a precision measurement. You should make a plot of what are called
-the ‚Äùresiduals‚Äù. A residual is the difference between the data in the binned histogram
-and the best-fit mass model value for the centre of that bin. Describe what you see.
-\item There are several ways to enhance the scope of the project.
-
-\begin{itemize} 
-\item For example, if the single
-Gaussian mass model does not fit the data perfectly, one can try other mass models,
-i.e. by using a signal PDF that goes beyond a single Gaussian
-function. One example: is a PDF comprising a function which is the sum of two Gaussian functions (i.e. one
-narrow and one wide Gaussian function to fit a single D meson
-peak. Alternatively try a Crystal Ball function, which incorporates a non-Gaussian tail at the lower end of
-the mass peak. The functional shape is described elsewhere, e.g. see:
-\begin{verbatim}
-https://en.wikipedia.org/wiki/Crystal_Ball_function 
-\end{verbatim} 
-You could implement each of these functions in your PDF and see how much better
-they are at describing the data.
-\item Read the publication and see what is said about systematic errors. Make a reasonable
-attempt at determining some systematic errors on the masses.
-\item Compare your results to the PDG and previous measurements.
-\item Study how the mass and the width of the peak (the resolution)
-  depends on the transverse momentum (pt) and rapidity (eta).
-\end{itemize}
-
-
-\begin{comment}
-
-\item Now consider the entire mass range, and perform a simultaneous fit for all three Upsilon peaks, and the underlying background. Again you should always report the parameter values, and their errors. Plot the fitted signal shape on top of the data.
-
-\item The results so far probably look "quite good" by eye.  i.e. the signal shape plotted on top of the data probably looks like it fits quite well.  However this can be misleading when performing a precision measurement.  You should make a plot of what are called the "residuals". A residual is the difference between the data in the binned histogram and the best-fit mass model value for the centre of that bin. Describe what you see.
-
-\item There are several ways to enhance the scope of the project. For example, if the single Gaussian mass model does not fit the data perfectly, one can try other mass models, i.e. by using a signal PDF that goes beyond a single Gaussian function.  Two examples are:
-\item A PDF comprising a function which is the sum of two Gaussian functions (i.e. one narrow and one wide Gaussian function to fit a single Upsilon mass peak)
-\item A Crystal Ball function, which incorporates a non-Gaussian tail at the lower end of the mass peak. The functional shape is described elsewhere, e.g. see: \url{http://en.wikipedia.org/wiki/Crystal_Ball_function}. 
-
-You could implement each of these functions in your PDF and see how much better they are at describing the data.
-
-\item Read the publication and see what is said about systematic errors.  Make a reasonable attempt at determining some systematic errors on the masses.
-
-\item As on open ended activity, you will see in the paper that the analysis is also done by dividing the data up into bins of transverse momentum (pT) and rapidity (eta). You can explore doing this analysis yourself. It is somewhat more complex as you have to think about which are common parameters (e.g. masses) and which are not (e.g. background fractions.) Larger dataset, including transverse momentum are available if required.
-
-\end{comment}
-
-\end{enumerate}
-
-\input{dah-project-planning} 
- 
-
-
-\newpage
-\section{Project F2: Make Accurate Measurements of Particle Masses}
-
-\subsection{Goals of project}
-
-You will use LHCb data on the invariant mass of particle candidates that you were introduced to during a checkpoint. You will analyse this in a much more sophisticated way and closer to the actual analysis performed leading to its publication. You will use the maximum likelihood process to fit different mass model shapes to the data. From this you will determine the parameters of the mass model for the three signal peaks, and their errors. You will start with a very simple Gaussian mass model. You will then improve this and use a more sophisticated model.
-
-The projects have an open-ended aspect and are an opportunity where you can show your own initiative and demonstrate your experimental and computational skills. 
-
-\subsection{Equipment for project F2}
-
-Note: this is a data analysis project, which does not require use of the Raspberry Pi.
-This project is best carried out using the Physics CPlab computers. No other equipment is needed.  There is a CPlab computer available on every desk in the DAH laboratory.
-You may also use your own laptop computer, but you will need to be able to install
-python and python packages on your own. 
-
-
-\subsection{Detailed project description}
-
-You were previously introduced to the LHCb Upsilon data. In this
-project you will explore another LHCb dataset where a $\psi(2S)$ meson
-(a bound $c\overline{c}$ state) and a pair of
-oppositely pions have been combined. Two clear
-peaks are observed in this mass spectrum corresponding to the $B_s$
-and $B^0$ mesons, see figure below %(Fig.~\ref{fig:bmass}). 
-The background shape is quite
-complex. At higher masses it is exponential in shape. At lower masses
-there is an additional background from the decay $B^0 \rightarrow
-\psi(2S) K^+ \pi^-$ where the kaon has been incorrectly identified as
-a pion. For more information see: {DOI: 10.1016/j.nuclphysb.2013.03.004 and DOI: 10.1016/j.physletb.2015.06.038}.
-
-
-During checkpoint 6, you performed some very simple "peak finding". In this project you are going to do the analysis much like it would actually be carried out in a particle physics experiment.
-
-%
-%\begin{figure}[htb!]
-\begin{center}
-\includegraphics[width=0.75\textwidth]{figs/psi2Spipi.pdf}\\
-%\caption
-{\small $\psi ({\rm 2S}) \pi^{+} \pi^{-}$  invariant mass distribution.}
-%\label{fig:bmass}
-\end{center}
-%\end{figure}
-%
-
-
-\begin{enumerate}
-
-
-\item Consider first the $B_s$ peak which is the particle with the highest
-mass, i.e. the right most peak in the plot. Construct a composite probability density
-function (PDF) for the invariant mass of the muon pairs, which
-contains two components :
-
-\begin{itemize}
-\item A Gaussian shape to fit the $B_s$ peak;
-\item A shallow falling exponential to fit the background shape of the mass spectrum
-underneath the peak.
-\end{itemize}
-
-\item Use this PDF in a Maximum Likelihood fit to determine the parameters of the PDF.
-Note hat it is essential that the composite PDF remains normalised to 1 over the range
-of the fit. 
-
-Determine the $B_s$ meson mass and yield, and all other parameters, and their and
-errors\footnote{You can almost certainly obtain the parameter errors directly from your minimization engine (scipy.optimize.minimise, or Minuit). It would be good to show that you understand these by obtaining them yourself from the parameters of the Gaussian signal fit - this is described in the data handling lectures.}.
-
-Plot the fitted signal shape on top of the data.
-
-\item Now consider the mass range above the reflection, and perform a simultaneous fit for both
-peaks, and the underlying background. Again you should always report the parameter
-values, and their errors. Plot the fitted signal shape on top of the data.
-
-\item The results so far probably look "quite good" by eye.  i.e. the signal shape plotted on top of the data probably looks like it fits quite well.  However this can be misleading when performing a precision measurement.  You should make a plot of what are called the "residuals". A residual is the difference between the data in the binned histogram and the best-fit mass model value for the centre of that bin. Describe what you see.
-
-\newpage
-
-\item There are several ways to enhance the scope of the project.
-
-\begin{itemize} 
-\item For example, if the single
-Gaussian mass model does not fit the data perfectly, one can try other mass models,
-i.e. by using a signal PDF that goes beyond a single Gaussian
-function. One example: is a PDF comprising a function which is the sum of two Gaussian functions (i.e. one
-narrow and one wide Gaussian function to fit a single D meson
-peak. Alternatively try a Crystal Ball function, which incorporates a non-Gaussian tail at the lower end of
-the mass peak. The functional shape is described elsewhere, e.g. see:
-\begin{verbatim}
-https://en.wikipedia.org/wiki/Crystal_Ball_function 
-\end{verbatim} 
-You could implement each of these functions in your PDF and see how much better
-they are at describing the data.
-\item Try to extend the fit to include the kinematic reflection
-\item Read the publication and see what is said about systematic errors. Make a reasonable
-attempt at determining some systematic errors on the masses.
-\item Compare your results to the PDG and previous measurements.
-\item From the yields of $B_s$ and $B^0$ mesons, following the
-  procedures in the papers try to evaluate the ratio of branching
-  ratios of these modes.
-\end{itemize}
-
-\begin{comment}
-
-\item Consider first the Upsilon(1S) ($\Upsilon \rm (1S)$) particle, which is the particle with the lowest mass, i.e. the left most  peak in the plot. Construct a composite probability density function (PDF) for the invariant mass of the muon pairs, which contains two components:
-\begin{itemize}
-\item A Gaussian shape to fit the  $\Upsilon \rm (1S)$ mass peak;
-\item A shallow falling exponential to fit the background shape of the mass spectrum underneath the peak.
-\end{itemize}
-
-\item	Use this PDF in a Maximum Likelihood fit to determine the parameters of the PDF. Note hat it is essential that the composite PDF remains normalised to 1 over the range of the fit.
-
-Determine the $\Upsilon \rm (1S)$  meson mass and yield, and all other parameters, and their and errors\footnote{You can almost certainly obtain the parameter errors directly from your minimization engine (scipy.optimize.minimise, or Minuit). It would be good to show that you understand these by obtaining them yourself from the parameters of the Gaussian signal fit - this is described in the data handling lectures.}.
-
-Plot the fitted signal shape on top of the data.
-
-\item Now consider the entire mass range, and perform a simultaneous fit for all three Upsilon peaks, and the underlying background. Again you should always report the parameter values, and their errors. Plot the fitted signal shape on top of the data.
-
-\item The results so far probably look "quite good" by eye.  i.e. the signal shape plotted on top of the data probably looks like it fits quite well.  However this can be misleading when performing a precision measurement.  You should make a plot of what are called the "residuals". A residual is the difference between the data in the binned histogram and the best-fit mass model value for the centre of that bin. Describe what you see.
-
-\item There are several ways to enhance the scope of the project. For example, if the single Gaussian mass model does not fit the data perfectly, one can try other mass models, i.e. by using a signal PDF that goes beyond a single Gaussian function.  Two examples are:
-\item A PDF comprising a function which is the sum of two Gaussian functions (i.e. one narrow and one wide Gaussian function to fit a single Upsilon mass peak)
-\item A Crystal Ball function, which incorporates a non-Gaussian tail at the lower end of the mass peak. The functional shape is described elsewhere, e.g. see: \url{http://en.wikipedia.org/wiki/Crystal_Ball_function}. 
-
-You could implement each of these functions in your PDF and see how much better they are at describing the data.
-
-\item Read the publication and see what is said about systematic errors.  Make a reasonable attempt at determining some systematic errors on the masses.
-
-\item As on open ended activity, you will see in the paper that the analysis is also done by dividing the data up into bins of transverse momentum (pT) and rapidity (eta). You can explore doing this analysis yourself. It is somewhat more complex as you have to think about which are common parameters (e.g. masses) and which are not (e.g. background fractions.) Larger dataset, including transverse momentum are available if required.
-\end{comment}
-
-\end{enumerate}
-
-\input{dah-project-planning} 
  
 
