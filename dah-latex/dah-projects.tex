@@ -616,7 +616,7 @@ For this project you will need the following items:
 %\item ADAFRUIT INDUSTRIES  914  PI COBBLER BREAKOUT KIT
 \item Windows PC in laboratory
 \item WiFi hotspot 
-\item USB to WiFi adapter Wi-PI
+%\item USB to WiFi adapter Wi-PI
 \end{itemize}
 Some of this equipment will be located in the red box G. You will have to share some items between Tuesday and Thursday sessions. 
 
@@ -697,9 +697,15 @@ and you  should  obtain the IP address of the HTTP server, see:
     HTTP server  started
 \end{verbatim}
 
-\item The final step is to read the DHT22 \& ESP8266 with a USB to WiFi adapter
- remotely from  the Raspberry-Pi.
-   Check the network connection and select the WiFi hotspot. You might have to type in the password. Using a web browser, e.g. epiphany, you can now read the sensor by connecting to the correct IP address, e.g. {\tt http://192.168.1.2}.
+\item The final step is to read the DHT22 \& ESP8266 remotely 
+with the on-board WiFi adapter of  the Raspberry-Pi. To enable WiFi on the Raspberry-Pi,
+execute the following command:
+%
+\begin{verbatim}
+    studentnn@dahpimm  ~ $ wpa_cli enable wlan0 
+\end{verbatim}
+%
+   Check the network connection and select the WiFi hotspot. You might have to type in the password. Using the Chromium web browser, you can now read the sensor by connecting to the correct IP address, e.g. {\tt http://192.168.1.2}.
 Find out how to read temperature and humidity from the DHT22 Adafruit webpage, 
 \url{https://learn.adafruit.com/esp8266-temperature-slash-humidity-webserver/using-the-webserver}.
 
