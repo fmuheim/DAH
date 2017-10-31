@@ -110,6 +110,9 @@ Some of this equipment will be located in the red box C. You will have to share 
 
 The SPI I/O expander chip (MCP23S17) is supported by the \webiopi framework. In checkpoint Pi 3 you used an 8 bit I2C expander chip in a very similar way, so you can built upon this work. For this project we recommend that you use the MCP23S17 chip, which is a 16 bit SPI expander. While the
 two expander chips are different devices the same python methods can be applied when using \webiopi.
+
+\lstinputlisting{../scripts/project_C_c.py}
+\vspace*{-0.5cm}
  
 \begin{enumerate}
 \item Start your project using switch buttons to play sounds at first and then change to free wires forming touch sensors. The insulation from the end of each wire should be stripped. To be able to use the expander chip with wires as touch sensors one should utilise the positive logic (logic 1 means wire was touched).
