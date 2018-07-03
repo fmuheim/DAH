@@ -25,24 +25,24 @@ Draw a schematic diagram for this circuit, see example below.
 \end{center}
                                                             
  
-\item [1.2.] Using positive logic (active high) connect a push-button Switch between 3.3V and GPIO23 and, with a 1kOhm resistor in series, to ground and explain what happens on the webIOPI header webpage.
+\item [1.2.] Using positive logic (active high) connect a push-button Switch between 3.3V and GPIO23 and, with a 1kOhm resistor in series, to ground and explain what happens on the \webIOPi header webpage.
 Draw a schematic diagram for this circuit. Afterwards stop the \webIOPi web server.
 %Repeat the exercise with negative logic, explain it and draw a schematic diagram. 
  
 %\hfill [1 mark]\\
       
 
-\item [1.3.] Connect an LED with a 1~kOhm resistor as in checkpoint 1.1 above. Start python interactively to set GPIO 24. 
-Using the code templates, import the webiopi framework, make a GPIO object and turn the LED on and off.
+\item [1.3.] Connect an LED with a 1~kOhm resistor as in checkpoint 1.1 above. Start python interactively to control GPIO 24.
+Using this code template, import the GPIO library and turn the LED on and off.
 %
 \begin{verbatim}
-    studentnn@dahpimm  ~ $ sudo python3
+    studentnn@dahpimm  ~ $ python3
 \end{verbatim}
 \lstinputlisting{../scripts/checkpoint_1a.py}
 
 
-Write the first Python script to blink an LED for either positive or negative logic 
-by adding a "while loop".\\
+Alter the first python script to blink an LED, connected with either positive or negative logic,
+by adding a while loop.\\
 
 \lstinputlisting{../scripts/checkpoint_1b.py}
 %\vspace*{-0.5cm}
@@ -50,7 +50,7 @@ by adding a "while loop".\\
 
 
 \item [1.4.] Connect the push button switch using using negative logic (active low) and the LED circuit with positive logic (active high).
-Write a python script to toggle the LED status every time the push button switch is pushed. \\
+Write a python script to toggle the LED state every time the push button switch is pushed. \\
 %once using negative logic for the push button switch. Connect the push and positive logic for the LED. \\
 
 \lstinputlisting{../scripts/checkpoint_1c.py}
