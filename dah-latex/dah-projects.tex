@@ -139,11 +139,11 @@ Once you have set up the hardware, play a few notes and make sure you understand
 
 Polyphony means that the synthesizer can play more than one note at the same time, i.e. this means that the synthesizer is able to detect two or more buttons being pressed at the same time. In reality the sound device (i.e. the sound chip of the Raspberry Pi) is producing multiple interleaving sounds, but our hearing sense perceives them as concurrently played sounds.
 
-\item To play two or more sounds at the same time it is not recommended to use the \begin{tt}Snack\end{tt} audio package. Instead you are encouraged to use pre-recorded audio samples from a piano in mp3 format. 
+\item To play two or more sounds at the same time it is not recommended to use the \begin{tt}Snack\end{tt} audio package. Instead you are encouraged to use pre-recorded audio samples from a piano in wav format.
 
 You can download a compressed file with the audio samples from the DAH DropBox page. To play an audio file (sampled note) 
-you can use an application such as \begin{tt}mpg321\end{tt} or  \begin{tt}omxplayer\end{tt}. Below an example is given of how to play two sounds at the same time.
-Note the \begin{tt}-q\end{tt} command to \begin{tt}mpg321\end{tt}, which stops it from producing unhelpful text output.\\
+you can use an application such as \begin{tt}aplay\end{tt}. Below an example is given of how to play two sounds at the same time.
+Note the \begin{tt}-q\end{tt} command to \begin{tt}aplay\end{tt}, which stops it from producing unhelpful text output.\\
 
 \lstinputlisting{../scripts/project_C_b.py}
 \vspace*{-0.5cm}
@@ -230,7 +230,7 @@ Now that you have a functioning ultrasonic range finder there are several possib
 Note that the loudspeakers are power hungry, so they  should be connected  via USB to the 
 monitor.
 
-To play an audio file (sampled note) you can use an application such as \begin{tt}mpg321\end{tt} or or  \begin{tt}omxplayer\end{tt}. Below an example is given of how to play a note using a python script.\\
+To play an audio file (sampled note) you can use an application such as \begin{tt}aplay\end{tt}. Below an example is given of how to play a note using a python script.\\
 
 \lstinputlisting{../scripts/project_D_a.py}
 \vspace*{-0.5cm}

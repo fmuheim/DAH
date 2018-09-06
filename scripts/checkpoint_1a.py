@@ -1,13 +1,14 @@
-# Import webIOPi
-import webiopi
+# Import GPIO library
+import RPi.GPIO as GPIO
 
-# Make a GPIO object
-GPIO = webiopi.GPIO
+# Configure standard GPIO mode
+# "BCM" refers to the Broadcom processor
+GPIO.setmode(GPIO.BCM)
 
-# Set which GPIO pin is connected to the LED
+# Define the pin number for the LED
 LED0 = 24 
 
-# Setup GPIOs
-GPIO.setFunction(LED0, GPIO.OUT) # Set Pin as output
-GPIO.digitalWrite(LED0, GPIO.HIGH) # Turn on the LED 
-GPIO.digitalWrite(LED0, GPIO.LOW) # Turn off the LED 
+# Control the LED
+GPIO.setup(LED0, GPIO.OUT) # Set Pin as output
+GPIO.output(LED0, GPIO.HIGH) # Turn on the LED
+GPIO.output(LED0, GPIO.LOW) # Turn off the LED
