@@ -347,6 +347,24 @@ The LHCb experiment at the Large Hadron Collider at CERN has recorded a sample o
 
 During checkpoint 6, you performed some very simple "peak finding". In this project you are going to do the analysis much like it would actually be carried out in a particle physics experiment.
 
+Download the files ups-15.bin and ups-15-small.bin  from the DAH Dropbox, 
+These files contain the data recorded by LHCb in 2015 and a subset with a factor 5 less data.
+The files are written in binary format and contain five observables for a large number of muon pairs
+\begin{itemize}
+\item  invariant mass of muon pair in   GeV/$c^2$;
+\item transverse momentum $p_\perp$ of muon pair in GeV/$c$;
+\item rapidity $\eta$ of muon pair;
+\item  momentum $p$ of muon pair in GeV/$c$;
+\item transverse momentum $p_{\perp,1}$ of first muon in GeV/$c$;
+\item transverse momentum $p_{\perp,2}$ of second muon in GeV/$c$.
+\end{itemize}
+
+Write a python script that reads the data from this file, see below. Plot histograms of all six variables, choosing a reasonable bin width. Always label plots correctly with title and axes and save these to a file. 
+
+\lstinputlisting{../scripts/project_F_a.py}
+\vspace*{-0.5cm}
+
+
 \begin{enumerate}
 \item Consider first the Upsilon(1S) ($\Upsilon \rm (1S)$) particle, which is the particle with the lowest mass, i.e. the left most  peak in the plot. Construct a composite probability density function (PDF) for the invariant mass of the muon pairs, which contains two components:
 \begin{itemize}
@@ -367,15 +385,22 @@ Plot the fitted signal shape on top of the data.
 
 \item The results so far probably look "quite good" by eye.  i.e. the signal shape plotted on top of the data probably looks like it fits quite well.  However this can be misleading when performing a precision measurement.  You should make a plot of what are called the "residuals". A residual is the difference between the data in the binned histogram and the best-fit mass model value for the centre of that bin. Describe what you see.
 
-\item There are several ways to enhance the scope of the project. For example, if the single Gaussian mass model does not fit the data perfectly, one can try other mass models, i.e. by using a signal PDF that goes beyond a single Gaussian function.  Two examples are:
+\item There are several ways to enhance the scope of the project. For example, if the single Gaussian mass model does not fit the data perfectly, one can try other mass models, i.e. by using a signal PDF that goes beyond a single Gaussian function.  Examples are:
+\begin{itemize}
 \item A PDF comprising a function which is the sum of two Gaussian functions (i.e. one narrow and one wide Gaussian function to fit a single Upsilon mass peak)
 \item A Crystal Ball function, which incorporates a non-Gaussian tail at the lower end of the mass peak. The functional shape is described elsewhere, e.g. see: \url{http://en.wikipedia.org/wiki/Crystal_Ball_function}. 
 
 You could implement each of these functions in your PDF and see how much better they are at describing the data.
+\end{itemize}
+
+\item Make 2-dimensional plots of the additional observables vs the invariant mass of the muon pair.
+Find out if you can improve the purity of your signal sample.
+The purity is defined as the ratio of signal events over all events in a region.
+
+\item As on open ended activity, you will see in the paper that the analysis is also done by dividing the data up into bins of transverse momentum (pT) and rapidity (eta). You can explore doing this analysis yourself. It is somewhat more complex as you have to think about which are common parameters (e.g. masses) and which are not (e.g. background fractions).
 
 \item Read the publication and see what is said about systematic errors.  Make a reasonable attempt at determining some systematic errors on the masses.
 
-\item As on open ended activity, you will see in the paper that the analysis is also done by dividing the data up into bins of transverse momentum (pT) and rapidity (eta). You can explore doing this analysis yourself. It is somewhat more complex as you have to think about which are common parameters (e.g. masses) and which are not (e.g. background fractions.) Larger dataset, including transverse momentum are available if required.
 
 \end{enumerate}
 
@@ -383,7 +408,7 @@ You could implement each of these functions in your PDF and see how much better 
  
  
 
-
+\begin{comment}
 \newpage
 \section{Project F2: Make Accurate Measurements of Particle Masses}
 
@@ -590,6 +615,7 @@ attempt at determining some systematic errors on the masses.
 \end{enumerate}
 
 \input{dah-project-planning} 
+\end{comment}
 
 \newpage
 \section{Project G: Building a Remote Sensing System}
