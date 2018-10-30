@@ -1,7 +1,9 @@
+import serial
+import numpy
+
 # open the serial port with baud rate 115200bps
 # this is the rate used by the Arduino microcontroller
 # Arduino will be on port ttyACM0 by default
-import serial
 ser=serial.Serial('/dev/ttyACM0',115200, timeout=5)  
 
 # a small delay may be necessary to give the microcontroller time to respond
@@ -27,3 +29,6 @@ time.sleep(1)
 
 # read data sample from Arduino ADC (1024 bytes, 8-bit resolution)
 data=ser.read(1024)
+
+# convert data to an array of integers (value = 0..255, 0 = zero voltage, 255 = +5V)
+values=numpy.frombuffer(data,dtype=numpy.uint8)
