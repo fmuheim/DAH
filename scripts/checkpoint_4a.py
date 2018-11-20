@@ -1,7 +1,10 @@
 # Imports
-import RPi.GPIO as GPIO
+import webiopi
 import time
 from webiopi.devices.digital.pcf8574 import PCF8574A
+
+# Retrieve GPIO lib
+GPIO = webiopi.GPIO
 
 # Setup chip
 mcp = PCF8574A(slave=0x38)
