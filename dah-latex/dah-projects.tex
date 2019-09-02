@@ -121,9 +121,9 @@ You can use multuple MCP23S17 devices with the same CS setting provided they hav
 \item Start your project using switch buttons to play sounds at first and then you can think about including additional forms of input (or output).
 Remember that you can use components from the checkpoints, as well as what is in the project box.
 
-\item You can base your project on the \begin{tt}Snack\end{tt}  audio package, which is already installed on the Raspberry-Pi. You can find a description on the following Webpage: \url{https://www.daniweb.com/software-development/python/code/216655/play-a-musical-note-python}.
-%
-Here is an example code of how to use this package.\\
+\item You can base your project on the \begin{tt}PyGame\end{tt} package, which is already installed on the Raspberry-Pi.
+You can find a more information on the following webpage: \url{https://www.pygame.org}.
+Here is an example of how to use this package as a synthesiser, playing a simple sine-wave note.\\
 
 \lstinputlisting{../scripts/project_C_a.py}
 \vspace*{-0.5cm}
@@ -137,25 +137,25 @@ Once you have set up the hardware, play a few notes and make sure you understand
 \begin{enumerate}
 \item	You can play a tune and record it.
 
-%\item  You may want to try another sound library/package available for python. If you find such a %package ask a demonstrators help to install the package for you on the Raspberry-Pi.
+\item Try to implement `polyphony:' make the synthesizer able to play more than one note at the same time.
+In reality the Raspberry Pi is producing multiple interleaving sounds, but we perceive them as concurrently played sounds.
 
-\item There are many ways to enrich your project, for example, try to implement what is called "polyphony" in the world of music synthesizers.
+Polyphony requires that the synthesizer is able to detect two or more buttons being pressed at the same time.
+Capturing two or more buttons being pressed at once can be achieved by reading the I/O expander as a parallel bus instead of reading the state of each button in sequence.
+When using parallel or port reading, one should save the state of the port as a single variable.
+Each binary bit of this variable corresponds to the state of a single input button.
 
-Polyphony means that the synthesizer can play more than one note at the same time, i.e. this means that the synthesizer is able to detect two or more buttons being pressed at the same time. In reality the sound device (i.e. the sound chip of the Raspberry Pi) is producing multiple interleaving sounds, but our hearing sense perceives them as concurrently played sounds.
+\item You could experiment with different wave forms.
 
-\item To play two or more sounds at the same time it is not recommended to use the \begin{tt}Snack\end{tt} audio package. Instead you are encouraged to use pre-recorded audio samples from a piano in wav format.
+\item As well as synthesising your own sounds, you can use pre-recorded audio samples from a piano in \begin{tt}.wav\end{tt} format.
 
-You can download a compressed file with the audio samples from the DAH DropBox page. To play an audio file (sampled note) 
-you can use an application such as \begin{tt}aplay\end{tt}. Below an example is given of how to play two sounds at the same time.
-Note the \begin{tt}-q\end{tt} command to \begin{tt}aplay\end{tt}, which stops it from producing unhelpful text output.\\
+You can download a compressed file with the audio samples from the DAH DropBox page.
+The \begin{tt}PyGame\end{tt} package can play most \begin{tt}.wav\end{tt} format files in just the same way as your synthesised notes.
+Below an example is given of how to play two sounds at the same time. \\
 
 \lstinputlisting{../scripts/project_C_b.py}
 \vspace*{-0.5cm}
 \end{enumerate}
-
-Capturing two or more buttons being pressed at the same time can be achieved by reading the expander as a parallel bus instead of reading the state of each push button switch in sequence. (Reading in sequence is commonly referred to as polling). When using parallel or port reading, one should save the state of the port to a variable, which can be called a "switch register". Playing the synthesizer will correspond to sweeping all bits of the switch register for finding pressed switches. After the sweep, one should set the state of the switch register to idle.
- 
-Can you find where the bottle-neck occurs in trying to achieve polyphony? Is the limitation due to hardware or software?
 
 
 \input{dah-project-planning}

@@ -1,45 +1,54 @@
-import tkinter  #This is for python3
-import tkSnack
+import numpy as np
+import pygame
+import time
+import math
+import pylab as pl
 
+# Some constants
+outputRate = 44100
+maxAmplitude = np.iinfo( np.int16 ).max
 
-def setVolume(volume=50):
-    """set the volume of the sound system"""
+# Create an array containing a sine wave
+def SineWave( pitch, volume, duration ):
 
-    if volume > 100:
-        volume = 100
-    elif volume < 0:
-        volume = 0
-    tkSnack.audio.play_gain(volume)
+    global outputRate, maxAmplitude
 
+    # Create the output buffer
+    totalSamples = int( outputRate * duration )
+    outputBuffer = np.zeros( ( totalSamples, 2 ), dtype=np.int16 )
 
-def playNote(freq, duration):
-    """play a note of freq (hertz) for duration (seconds)"""
+    # Calculate amplitude
+    amplitude = int( maxAmplitude * volume )
 
-    snd = tkSnack.Sound()
-    filt = tkSnack.Filter('generator', freq, 30000, 0.0, 'sine', int(11500*duration))
-    snd.stop()
-    snd.play(filter=filt, blocking=1)
+    # Calculate change in the wave for each output sample
+    waveStep = float( pitch / outputRate ) * 2.0 * math.pi
 
+    # Fill buffer
+    for i in range( totalSamples ):
 
-def soundStop():
-    """stop the sound the hard way"""
+        # Left channel
+        outputBuffer[i][0] = amplitude * np.sin( i * waveStep )
 
-    try:
-        root = root.destroy()
-        filt = None
-    except:
-        pass
+        # Right channel
+        outputBuffer[i][1] = amplitude * np.sin( i * waveStep )
 
+    return outputBuffer
 
-root = tkinter.Tk()   #This is for python3
+# Set up the audio output - only once!
+# 2-channel (stereo), 16-bit signed integer value output at 44khz
+pygame.mixer.init( frequency=outputRate, channels=2, size=-16)
 
-# have to initialize the sound system, required!!
-tkSnack.initializeSnack(root)
-# set the volume of the sound system (0 to 100%)
-setVolume(50)
-# play a note of requency 440 hertz (A4) for a duration of 2 seconds
-playNote(440, 2)
-# optional
-soundStop()
+# Create a note (C5)
+sin523 = SineWave( 523, 1.0, 1.0 )
 
-root.withdraw()
+# Make a plot of the wave if you like
+pl.plot( sin523[0:100] ) # Just the first 100 values for clarity
+pl.show()
+
+# Play sound
+noteC5 = pygame.mixer.Sound( buffer=sin523 )
+noteC5.play()
+
+# Keep the program active until the note is complete
+time.sleep(2)
+
