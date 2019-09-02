@@ -108,14 +108,18 @@ Some of this equipment will be located in the red box C. You will have to share 
 
 \subsection{Building the synthesizer}
 
-The SPI I/O expander chip (MCP23S17) is supported by the \webiopi framework. In checkpoint Pi 3 you used an 8 bit I2C expander chip in a very similar way, so you can built upon this work. For this project we recommend that you use the MCP23S17 chip, which is a 16 bit SPI expander. While the
+The SPI I/O expander chip (MCP23S17) is supported by the \webiopi framework. In checkpoint 4 you used an 8 bit I2C expander chip in a very similar way, so you can build upon this work. For this project we recommend that you use the MCP23S17 chip, which is a 16 bit SPI expander. While the
 two expander chips are different devices the same python methods can be applied when using \webiopi.
 
 \lstinputlisting{../scripts/project_C_c.py}
 \vspace*{-0.5cm}
+
+{\bf NB:} The documentation for the MCP23S17 chip is a little confusing because it allows I2C-style addresses as well as SPI-style chip select (CS) signals.
+You can use multuple MCP23S17 devices with the same CS setting provided they have different hardware addresses, but if you want to include other SPI devices in the project they will need a separate CS as usual.
  
 \begin{enumerate}
-\item Start your project using switch buttons to play sounds at first and then change to free wires forming touch sensors. The insulation from the end of each wire should be stripped. To be able to use the expander chip with wires as touch sensors one should utilise the positive logic (logic 1 means wire was touched).
+\item Start your project using switch buttons to play sounds at first and then you can think about including additional forms of input (or output).
+Remember that you can use components from the checkpoints, as well as what is in the project box.
 
 \item You can base your project on the \begin{tt}Snack\end{tt}  audio package, which is already installed on the Raspberry-Pi. You can find a description on the following Webpage: \url{https://www.daniweb.com/software-development/python/code/216655/play-a-musical-note-python}.
 %
