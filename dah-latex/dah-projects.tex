@@ -351,8 +351,9 @@ The LHCb experiment at the Large Hadron Collider at CERN has recorded a sample o
 
 During checkpoint 6, you performed some very simple "peak finding". In this project you are going to do the analysis much like it would actually be carried out in a particle physics experiment.
 
-Download the files ups-15.bin and ups-15-small.bin  from the DAH Dropbox, 
-These files contain the data recorded by LHCb in 2015 and a subset with a factor 5 less data.
+Download the files ups-15.bin, ups-15-small.bin and ups-15-MC.bin   from the DAH Dropbox, 
+These files contain the data recorded by LHCb in 2015 and a subset with a factor 5 less data. 
+In addition, there is a file with simulated data (Monte Carlo).
 The files are written in binary format and contain five observables for a large number of muon pairs
 \begin{itemize}
 \item  invariant mass of muon pair in   GeV/$c^2$;
@@ -393,9 +394,12 @@ Plot the fitted signal shape on top of the data.
 \begin{itemize}
 \item A PDF comprising a function which is the sum of two Gaussian functions (i.e. one narrow and one wide Gaussian function to fit a single Upsilon mass peak)
 \item A Crystal Ball function, which incorporates a non-Gaussian tail at the lower end of the mass peak. The functional shape is described elsewhere, e.g. see: \url{http://en.wikipedia.org/wiki/Crystal_Ball_function}. 
-
-You could implement each of these functions in your PDF and see how much better they are at describing the data.
 \end{itemize}
+Implement one or both of these functions in your PDF. 
+First fit this PDF using the simulated Monte Carlo data. This allows you to see better
+how the additional parameters should improve the description of the tails of the signal peak.
+Then fit the PDF to the LHCb data and see how much better they are at describing the data.
+Consider fixing some of the shape parameters from the fit to the Monte Carlo sample.
 
 \item Make 2-dimensional plots of the additional observables vs the invariant mass of the muon pair.
 Find out if you can improve the purity of your signal sample.
