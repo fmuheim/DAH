@@ -13,6 +13,6 @@ print(xdata[0])
 # make list of invariant mass of events
 xmass = []
 for i in range(0,nevent):
-    xmass.append(xdata[i][0]/1000.)
+    xmass.append(xdata[i][0])
     if i < 10:
         print(xmass[i])
